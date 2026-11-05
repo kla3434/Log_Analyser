@@ -4,15 +4,18 @@ import re
 
 print("Log Results")
 
+#opens the log file
 try:
         with open("logs.txt", "r") as file:
                 content = file.read()
 except FileNotFoundError:
         print("Error: logs.txt could not be found.")
-
+#This code sifts through the log file and searches and counts the number of errors
 info = len(re.findall(r'\bINFO\b', content))
 error = len(re.findall(r'\bERROR\b', content))
 warn = len(re.findall(r'\bWARNING\b', content))
 
+#Prints results based the previously made variables
 print(f"The number of Information logs are {info}")
 print(f"The number of Error logs are {error}")
+print(f"The number of Warning logs are {warn}")
