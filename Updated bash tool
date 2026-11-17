@@ -1,0 +1,39 @@
+#To begin this short script, it requires a shebang
+#The shebang tells the OS how to run the script
+#!/bin/bash
+
+
+echo "Log Results"
+
+#Here I made multiple variables
+#These variables are based on possible results of logs
+#grep is used to search the text
+#-o will only allow the matching text to be printed
+#-w forces it to only match whole words
+#wc -l stands for word count and lines
+
+info=$(grep -o -w "INFO" logs.txt | wc -l)
+error=$(grep -o -w "ERROR" logs.txt | wc -l)
+warn=$(grep -o -w "WARNING" logs.txt | wc -l)
+
+
+
+#Here I have the automated outputs using the variables
+#When the script is run, this what will be outputed
+
+echo "The number of information logs are $info"
+echo "The number of error logs are $error"
+echo "The number of warning logs are $warn"
+
+
+# to add onto my project I added a listing of the dates and times of the logged events
+# awk goes line to line looking for the quoted words, from there it prints from the first and second column, based on the specific word
+
+echo "Dates and Times of Errors:"
+
+awk '$3 == "ERROR" {print $1, $2}' logs.txt
+
+echo "Dates and Times of Warning Logs:"
+
+awk '$3 == "WARNING" {print $1, $2}' logs.txt
+
